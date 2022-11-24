@@ -1,4 +1,4 @@
-# Data Scrientist Capstone: CNN for dog identification app
+# Data Scientist Capstone: CNN for dog identification app
 
 ## Installations
 
