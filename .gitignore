@@ -1,10 +1,13 @@
 # Original 
 .DS_Store
 dogImages/
+app_images/
 lfw/
-saved_models/weights.best.from_scratch.hdf5
-saved_models/weights.best.vgg16.hdf5
+saved_models/
 .ipynb_checkpoints/
+images/
+
+
 bottleneck_features/DogVGG16Data.npz
 *.npz
 
@@ -12,7 +15,7 @@ inline
 
 # ignore folder
 /ignore
-/images
+
 
 # ignore .idea directory
 /.idea
@@ -22,12 +25,6 @@ inline
 
 # ignore merge files
 .merge*
-
-# ignore all .pdf files
-*.pdf
-
-# ignore all .xlsx files
-*.xlsx
 
 # ignore all .npy files
 *.npy
