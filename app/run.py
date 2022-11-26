@@ -1,146 +1,87 @@
-import json
-import plotly
-import pandas as pd
-
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
+import numpy as np
+import csv
+from keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D
+from keras.layers import Dense
+from keras.models import Sequential 
+import keras.utils as image
 
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
 import joblib
-#from sklearn.externals import joblib
-#from sqlalchemy import create_engine
-import sqlite3 as db
-#import os
 
 app = Flask(__name__)
 
-def tokenize(text):
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
 
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
+def breed_prediction(img_path, model):
+    # loads RGB image as PIL.Image.Image type
+    img = image.load_img(img_path, target_size=(224, 224))
+    # convert PIL.Image.Image type to 3D tensor with shape (224, 224, 3)
+    x = image.img_to_array(img)
+    # convert 3D tensor to 4D tensor with shape (1, 224, 224, 3) and return 4D tensor
+    img_tensor = np.expand_dims(x, axis=0)
+    img_tensor_normalized = img_tensor.astype('float32')/255
+    # Get index of predicted dog breed for each image in test set
+    dog_breed_prediction = np.argmax(model.predict(img_tensor_normalized))
+    dog_breed_name = breed_dict[str(dog_breed_prediction)]
+    #print('The breed of the given picture is likely a dog breed "',dog_breed_name , '"')
+    return dog_breed_name
 
-    return clean_tokens
+# Load breed dictionary
+with open('breed_dict.csv') as csv_file:
+    reader = csv.reader(csv_file)
+    breed_dict = dict(reader)
+    
+    
+# Create CNN model
+model = Sequential()
+num_classes = len(breed_dict)
 
-# load data
-#path = os.path.dirname(os.path.realpath(__file__)) # directory path of the app
-con = db.connect('../data/DisasterResponse2.db') #../data/
-df = pd.read_sql_query("SELECT * from messages", con)
-#print (df.head(5))
-con.close()
+# Architecture definition.
+input_size = [224, 224, 3] # Size of the pictures and 3 color layers.
+# 1st layer convulotional is the imput layer with the size of the images
+model.add(Conv2D(filters=16,kernel_size=2, strides=1, activation='relu', input_shape= input_size))
+model.add(MaxPooling2D(pool_size=2))
+model.add(Conv2D(filters=32,kernel_size=2, strides=1,activation='relu', input_shape= input_size))
+model.add(MaxPooling2D(pool_size=2, strides=2, padding='same'))
+model.add(Conv2D(filters=64,kernel_size=2, strides=1,activation='relu', input_shape= input_size))
+model.add(MaxPooling2D(pool_size=2))
+model.add(GlobalAveragePooling2D())
+model.add(Dense(num_classes, activation='softmax')) # we use activation softmax for clasification problem.
 
-# load model
-model = joblib.load("../models/model.pkl")
+# compile the model
+model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
+
+#Load the Model with the Best Validation Loss
+model.load_weights('weights.best.from_scratch.hdf5')
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
 @app.route('/index')
 def index():
-    
-    # extract data needed for visuals
 
-    data = {'water': df.groupby('water').count().iloc[1].id, 'food': df.groupby('food').count().iloc[1].id, 'clothing': df.groupby('clothing').count().iloc[1].id, 'medical_products': df.groupby('medical_products').count().iloc[1].id}
-    issues_names = ['water', 'food', 'clothing', 'medical_products']
-    issues_counts = pd.Series(data=data, index=issues_names)
-    
-    data = {'transport': df.groupby('transport').count().iloc[1].id, 'buildings': df.groupby('buildings').count().iloc[1].id, 'electricity': df.groupby('electricity').count().iloc[1].id, 'hospitals': df.groupby('hospitals').count().iloc[1].id, 'aid_centers': df.groupby('aid_centers').count().iloc[1].id}
-    infraestructure_names = ['transport', 'buildings', 'electricity', 'hospitals', 'aid_centers']
-    infraestructure_counts = pd.Series(data=data, index=infraestructure_names)
-    
-    genre_counts = df.groupby('genre').count()['message']
-    genre_names = list(genre_counts.index)
-    
-    # visuals
-
-    graphs = [
-        {
-            'data': [
-                Bar(
-                    x=infraestructure_names,
-                    y=infraestructure_counts
-                )
-            ],
-
-            'layout': {
-                'title': 'Distribution of infraestructure related messages',
-                'yaxis': {
-                    'title': "Count"
-                },
-                'xaxis': {
-                    'title': "Infraestructure messages"
-                }
-            }
-        }
-        ,
-        {
-            'data': [
-                Bar(
-                    x=issues_names,
-                    y=issues_counts
-                )
-            ],
-
-            'layout': {
-                'title': 'Distribution of basic needs related messages',
-                'yaxis': {
-                    'title': "Count"
-                },
-                'xaxis': {
-                    'title': "Basic needs"
-                }
-            }
-        }
-        ,
-        {
-            'data': [
-                Bar(
-                    x=genre_names,
-                    y=genre_counts
-                )
-            ],
-
-            'layout': {
-                'title': 'Distribution of Message Genres',
-                'yaxis': {
-                    'title': "Count"
-                },
-                'xaxis': {
-                    'title': "Genre"
-                }
-            }
-        }
-    ]
-    
-    
-    
-    # encode plotly graphs in JSON
-    ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
-    graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
-    
     # render web page with plotly graphs
-    return render_template('master.html', ids=ids, graphJSON=graphJSON)
+    return render_template('master.html') #, ids=ids, graphJSON=graphJSON)
 
 
 # web page that handles user query and displays model results
 @app.route('/go')
 def go():
     # save user input in query
-    query = request.args.get('query', '') 
+    query = request.args.get('query', '')
+
+    file_path = "../app_images/"+query
 
     # use model to predict classification for query
-    classification_labels = model.predict([query])[0]
-    classification_results = dict(zip(df.columns[4:], classification_labels))
+    prediction_label = breed_prediction(file_path, model)
+
+    #print (prediction_label)
 
     # This will render the go.html Please see that file. 
     return render_template(
         'go.html',
-        query=query,
-        classification_result=classification_results
+        query=prediction_label
+
     )
 
 
