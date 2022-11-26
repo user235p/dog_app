@@ -13173,7 +13173,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="k">import</span> <span class="n">load_files</span>       
@@ -13253,7 +13253,7 @@ There are 836 test dog images.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -13303,7 +13303,7 @@ There are 836 test dog images.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>                
@@ -13387,7 +13387,7 @@ There are 836 test dog images.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># returns &quot;True&quot; if face is detected in image stored at img_path</span>
@@ -13405,7 +13405,7 @@ There are 836 test dog images.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">show_face</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
@@ -13442,20 +13442,22 @@ There are 836 test dog images.
 </ul>
 <p>Ideally, we would like 100% of human images with a detected face and 0% of dog images with a detected face.  You will see that our algorithm falls short of this goal, but still gives acceptable performance.  We extract the file paths for the first 100 images from each of the datasets and store them in the numpy arrays <code>human_files_short</code> and <code>dog_files_short</code>.</p>
 <p><strong>Answer:</strong></p>
+<p>We have detected a human face in 100% of the 'human_files', and 11% of the 'dog_files'.
+We can see that the algorithm detected human faces in one picture because there is a person with the dog, and by the rest cases, only parts of dog pictures where there were no human. Therefore the algotihm works not perfetly. In 10% of the cases detected a human face where there was no human face.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">human_files_short</span> <span class="o">=</span> <span class="n">human_files</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
 <span class="n">dog_files_short</span> <span class="o">=</span> <span class="n">train_files</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
 <span class="c1"># Do NOT modify the code above this line.</span>
 
-<span class="c1">## TODO: Test the performance of the face_detector algorithm </span>
+<span class="c1">## Test the performance of the face_detector algorithm </span>
 <span class="c1">## on the images in human_files_short and dog_files_short.</span>
 
 <span class="n">human_detected_count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -13490,7 +13492,7 @@ There are 836 test dog images.
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Number of humans detected in human files: 100 , that is  100.0 % of the files
+<pre>Number of humans detected in human files: 100 , that is  100 % of the files
 </pre>
 </div>
 </div>
@@ -13666,7 +13668,7 @@ There are 836 test dog images.
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Number of humans detected in dog files: 11 , that is  909.0909090909091 % of the files
+<pre>Number of humans detected in dog files: 11 , that is  11 % of the files
 </pre>
 </div>
 </div>
@@ -13851,6 +13853,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 <li>What percentage of the images in <code>dog_files_short</code> have a detected dog?</li>
 </ul>
 <p><strong>Answer:</strong></p>
+<p>In this case the dog_detector() function worked properly. It detected 0% dogs in the <code>human_files_short</code> images, and 100% in the  <code>dog_files_short</code> images.</p>
 
 </div>
 </div>
@@ -13860,7 +13863,7 @@ $$<p>Here, <code>nb_samples</code> is the number of samples, or number of images
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Test the performance of the dog_detector function</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Test the performance of the dog_detector function</span>
 <span class="c1">### on the images in human_files_short and dog_files_short.</span>
 
 <span class="n">dog_detected_count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -14012,6 +14015,14 @@ Number of dogs detected in dog files: 100 , that is  100 % of the files
 <p><img src="images/sample_cnn.png" alt="Sample CNN"></p>
 <p><strong>Question 4:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  If you chose to use the hinted architecture above, describe why you think that CNN architecture should work well for the image classification task.</p>
 <p><strong>Answer:</strong></p>
+<p>I used a CNN architecture with three convulotional layers. In order to increment the deep of the layers, I started with 16 filters at the first layer and gave the size of the input pictures and 3 for the deep corresponding to the three colors.</p>
+<p>Then I incremented it to 32 filters in the second and finally 64 filtes in the last convolutional layer. I tested different kernel sizes and strides, and the combination of a kernel size of 2 with stride of 1 gave good results.</p>
+<p>In ordfer to reduce the size of the matrix after incrementing the deep in the convulotional layers, I added MaxPooling layers witch reduced the size to the half of the input.</p>
+<p>After the last MaxPooling layer I added a GlobalAveragePooling layer witch reduces it to only one value and mantains the deep.</p>
+<p>Then I applied a fully connected layer with as many nodes as dog breed classes (133). This generates the output of the clasification. For this purpose I used the softmax activation function witch is typical for clasification problems.</p>
+<p>I think this achtitecture is right because the three first convulotional layers are able to abstract enough the information of the small input pictures to 133 different clases. And of course the final fully connected layer with the softmax activation is the right choice for generating a probability distribution for the 133 classes.</p>
+<p>This way, for the training we can caluclate the error very easily comparing the label of the picture to the class that it corresponds to.</p>
+<p>And for classifiing, we give the CNN a color picture, and it generates a probabilities for each class. So it is very easy to select witch class has the highest probability and define this one as the output of our classifier.</p>
 
 </div>
 </div>
@@ -14028,7 +14039,7 @@ Number of dogs detected in dog files: 100 , that is  100 % of the files
 <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
 <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">133</span>
 
-<span class="c1">### TODO: Define your architecture.</span>
+<span class="c1">### Architecture definition.</span>
 <span class="n">input_size</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_tensors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">train_tensors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">train_tensors</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
 <span class="c1"># 1st layer convulotional is the imput layer with the size of the images</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span> <span class="n">input_size</span><span class="p">))</span>
@@ -14190,7 +14201,7 @@ _________________________________________________________________
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="k">import</span> <span class="n">ModelCheckpoint</span>  
 
-<span class="c1">### TODO: specify the number of epochs that you would like to use to train the model.</span>
+<span class="c1">### Specify the number of epochs that you would like to use to train the model.</span>
 
 <span class="n">epochs</span> <span class="o">=</span> <span class="mi">20</span>
 
@@ -14333,10 +14344,10 @@ Epoch 20/20
 <div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># get index of predicted dog breed for each image in test set</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get index of predicted dog breed for each image in test set</span>
 <span class="n">dog_breed_predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span> <span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">test_tensors</span><span class="p">]</span>
 
-<span class="c1"># report test accuracy</span>
+<span class="c1"># Report test accuracy</span>
 <span class="n">test_accuracy</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dog_breed_predictions</span><span class="p">)</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">dog_breed_predictions</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test accuracy: </span><span class="si">%.4f%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">test_accuracy</span><span class="p">)</span>
 </pre></div>
@@ -14705,7 +14716,7 @@ test_{network} = bottleneck_features['test']</code></pre>
 <div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Obtain bottleneck features from another pre-trained CNN.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Obtain bottleneck features from another pre-trained CNN.</span>
 <span class="n">bottleneck_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;bottleneck_features/DogResnet50Data.npz&#39;</span><span class="p">)</span>
 <span class="n">train_DogResnet50</span> <span class="o">=</span> <span class="n">bottleneck_features</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span>
 <span class="n">valid_DogResnet50</span> <span class="o">=</span> <span class="n">bottleneck_features</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span>
@@ -14727,6 +14738,10 @@ test_{network} = bottleneck_features['test']</code></pre>
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
 <p><strong>Answer:</strong></p>
+<p>I took a look at all the four proposed architectures. There all four give good results. I decided at the end to use the ResNet50 because it seems to me to ve very efficient and don´t need so much ressources.</p>
+<p>Then I added attached to it a global average pooling layer witch reduces very strongly the results into one dimension, keeping the deep of the last convulotional layer in RestNet50. As we can see it in the next cell, it is 2048 deep.</p>
+<p>Then I applied a fully connected layer with 133 output values, and the corresponding softmax activation function for classification ploblems.</p>
+<p>These two added layers worked very good in my first implementation of the CNN with 3 convulotional layers and here with RestNet50 works also very good.</p>
 
 </div>
 </div>
@@ -14769,7 +14784,7 @@ test_{network} = bottleneck_features['test']</code></pre>
 <div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Define your architecture.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Define architecture.</span>
 <span class="n">DogResnet50model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
 <span class="n">DogResnet50model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GlobalAveragePooling2D</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="n">train_DogResnet50</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
 <span class="n">DogResnet50model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">133</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
@@ -14792,7 +14807,7 @@ test_{network} = bottleneck_features['test']</code></pre>
 <div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Compile the model.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Compile the model.</span>
 <span class="n">DogResnet50model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;rmsprop&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 <span class="n">DogResnet50model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
@@ -14844,7 +14859,7 @@ _________________________________________________________________
 <div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Train the model.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Train the model.</span>
 <span class="n">checkpointer</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s1">&#39;dogResnet50.weights.best.hdf5&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">DogResnet50model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_DogResnet50</span><span class="p">,</span> <span class="n">train_targets</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">valid_DogResnet50</span><span class="p">,</span> <span class="n">valid_targets</span><span class="p">),</span>
                     <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpointer</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -14958,7 +14973,7 @@ Epoch 20/20
 <div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Load the model weights with the best validation loss.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Load the model weights with the best validation loss.</span>
 <span class="n">DogResnet50model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">&#39;dogResnet50.weights.best.hdf5&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -14980,7 +14995,7 @@ Epoch 20/20
 <div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Calculate classification accuracy on the test dataset.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Calculate classification accuracy on the test dataset.</span>
 <span class="n">DogResnet50_predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">DogResnet50model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">test_DogResnet50</span><span class="p">]</span>
 <span class="n">test_accuracy</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">DogResnet50_predictions</span><span class="p">)</span><span class="o">==</span>
                           <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_targets</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">DogResnet50_predictions</span><span class="p">)</span>
@@ -15036,7 +15051,7 @@ Test accuracy: 78.8278%
 <div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Write a function that takes a path to an image as input</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Function that takes a path to an image as input</span>
 <span class="c1">### and returns the dog breed that is predicted by the model.</span>
 
 <span class="k">def</span> <span class="nf">Resnet50_predict_breed</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
@@ -15162,7 +15177,7 @@ Test accuracy: 78.8278%
 <div class="prompt input_prompt">In&nbsp;[90]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Write your algorithm.</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Algorithm.</span>
 
 <span class="k">def</span> <span class="nf">ImageApp</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">dog_detector</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
@@ -15247,6 +15262,14 @@ Test accuracy: 78.8278%
 <h3 id="(IMPLEMENTATION)-Test-Your-Algorithm-on-Sample-Images!">(IMPLEMENTATION) Test Your Algorithm on Sample Images!<a class="anchor-link" href="#(IMPLEMENTATION)-Test-Your-Algorithm-on-Sample-Images!">&#182;</a></h3><p>Test your algorithm at least six images on your computer.  Feel free to use any images you like.  Use at least two human and two dog images.</p>
 <p><strong>Question 6:</strong> Is the output better than you expected :) ?  Or worse :( ?  Provide at least three possible points of improvement for your algorithm.</p>
 <p><strong>Answer:</strong></p>
+<p>I used the 6 pictures provided at the udacity work folder. I applied the face detector and also for the dog and other pictures, I implemented a function to show the pictures.</p>
+<p>I am impressed about the results. It also found the "sample_cnn.png" as no dog and no human image.
+It works perfetly.</p>
+<p>In orther to improve the algorithm:</p>
+<p>1) I could include extra convolutional and max pooling layers after the RestNet50. But it is at cost of memory and run time resources.</p>
+<p>2) I could also include two or three fully connected layers instead of the one that I defines. For example starting with 1024 neurons, then 512, and a third one with the 133 classes. This could give more power to the clasification. But it also cost more ressources.</p>
+<p>3) I could replace the global average pooling layer with a normal max pooling layer and then flatten the result prior to feed the last stage of fully connected layers. This could also improve the clasification, but again requires more ressources.</p>
+<p>Therefore at the end of the day I decided myself for this very small structure after RestNet50 witch delivers very good results with reduced ressources.</p>
 
 </div>
 </div>
@@ -15256,10 +15279,10 @@ Test accuracy: 78.8278%
 <div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## TODO: Execute your algorithm from Step 6 on</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Execute your algorithm from Step 6 on</span>
 <span class="c1">## at least 6 images on your computer.</span>
 
-<span class="c1"># go throug the images in folder images</span>
+<span class="c1"># Go throug the images in folder images</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 
 <span class="n">folPath</span> <span class="o">=</span> <span class="s1">&#39;images&#39;</span>
