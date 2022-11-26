@@ -3,28 +3,32 @@
 ## Installations
 
 The code is written in Python.
-You need some  libraries:
+You need some libraries. For the application following libraries are necessary:
 - Numpy
-- Pandas
-- Matplotlib
-- IPython
-- Collections
+- csv
+- Flask
+- Keras
 
 ## Project Motivation
 
-With this project, it is possible to identify on pictures if there is a dog, and also witch dog breed is.
+With this project, it is possible to identify on dog pictures witch dog breed is.
 
 ## File Descriptions
 
-The code is at the followind notebook file:
+The code to train the model is at the following notebook file:
 **dog_app.ipynb**
 
-## How to Interact with your project
+The flask application is under app/run.py
 
-In the code there is the posibility to train a CNN model to identiry dog breed in pictures.
-The best model is saved into:
-**model.mf5**
-Afterwards it you can use the trained model to make predictions.
+## How to Interact with the app
+
+The model is already trained at the notebook and the best trained parameters are under **app/weights.best.from_scratch.hdf5**
+
+Afterwards the app uses CNN trained model to make the dog breed classification.
+
+In order to lunch the flask application, go into the app directory and execute python run.py
+	
+Once the web interface is launched, please give a file name that is available in app_images directory. The trained CNN model will classify the given image and give the most likely dob breed associated with it.	
 
 
 ## Licensing, Authors, Acknowledgements
